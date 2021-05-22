@@ -17,14 +17,16 @@ loginBtn.addEventListener('click', () => {
             password
         }).then(res => {
             console.log(res);
-            const token = res.data.token;
-            const expired = res.data.expired;
+            const { token, expired } = res.data;
             document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
             if (res.data.success) {
                 alert(res.data.message);
-                window.location = 'admin.html'
+                window.location = 'admin.html';
             } else {
                 alert(res.data.message);
             }
+        })
+        .catch(err => {
+            console.log(err);
         })
 })
